@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    name: springboot
+    type: com.alibaba.druid.pool.DruidDataSource
+    # druid相关配置
+    druid:
+      #监控统计拦截的filters
+      filter: stat
+      # mysql驱动
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/blog?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&serverTimeZone=GMT%2B8
+      username: root
+      password: root
+      initial-size: 1
+      min-idle: 1
+      max-active: 10
+      max-wait: 60000
+      # 间隔多久进行一次检测，检测需要关闭的空闲连接
+      time-between-eviction-runs-millis: 60000
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+
+logging:
+  level:
+    root: warn
+    com.hyn: info
+  file:
+    name: log/blog-pro.log
+
+server:
+  port: 8081

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragment :: header(~{::title})">
+    <title>博客详情</title>
+</head>
+<body>
+
+<!--导航-->
+<nav th:replace="_fragment :: menu(0)"></nav>
+
+<!--中间内容-->
+<div id="waypoints" class="m-padded-tb-big m-container-small  animated pulse">
+    <div class="ui container">
+        <!--header部分-->
+        <div class="ui top attached segment">
+            <div class="ui link list horizontal">
+                <div class="item">
+                    <img src="https://i.picsum.photos/id/1003/100/100.jpg" class="ui avatar image" alt="">
+                    <div class="content"><a href="#" class="header">HYN</a></div>
+                </div>
+                <div class="item">
+                    <i class="calendar icon"></i> 2020-1-26
+                </div>
+                <div class="item">
+                    <i class="eye icon"></i> 666
+                </div>
+            </div>
+        </div>
+        <!--图片区域-->
+        <div class="ui attached segment">
+            <img src="https://picsum.photos/id/1062/800/450" alt="" class="ui fluid rounded image">
+        </div>
+        <!--内容-->
+        <div class="ui attached padded segment">
+            <div class="ui right aligned basic segment">
+                <div class="ui orange basic label">原创</div>
+            </div>
+            <h2 id="title2" class="ui center aligned header">环境配置笔记</h2>
+            <br>
+            <div id="content" class="js-toc-content typo typo-selection m-padded-lr-responsive m-padded-tb-large">
+                <p>最近在看《第一行代码》这本书，今天看到了编写安卓程序解析 <strong>XML</strong> 文件的部分，在写程序之前需要自行搭建 <strong>Apache</strong> 服务器并新建可访问的 <strong>XML</strong> 文件。不过作者只介绍了 <strong>Windows</strong> 环境下的操作方法，这与 <strong>Mac</strong> 环境还是有较大差别的，笔者经过一番折腾，终于在 <strong>Mac</strong> 环境下成功创建并访问到 <strong>XML</strong> 文件。下面记录一下我的操作流程。</p>
+                <pre><code class="language-css">p { color : red}</code></pre>
+
+                <h3 id="title3">1. Apache 服务器安装与启动</h3>
+                <p>笔者的系统版本是 macOS 10.15.1，自带 <strong>Apache</strong> 服务，可通过 <code>/etc/apache2</code>路径查看当前系统是否有已安装 <strong>Apache</strong> ，如果未安装可以从这里下载安装：<a href="https://links.jianshu.com/go?to=http%3A%2F%2Fhttpd.apache.org%2Fdownload.cgi" target="_blank">下载安装 Apache</a></p>
+                <p>安装后可以使用以下命令开启或关闭 <strong>Apache</strong> 服务，<strong>sudo</strong> 命令可能需要输入开机密码</p>
+                <pre><code class="shell">sudo apachectl start/restart   # 启动/重启 Apache 服务
+sudo apachectl stop                      # 停止 Apache 服务
+</code></pre>
+                <p>启动之后可以在浏览器输入网址 <code>127.0.0.1</code>，如果出现一个下图这样的 <strong>"It works!"</strong> 的页面，则说明 <strong>Apache</strong> 服务器启动成功。</p>
+
+                <h3 id="title1">2. 创建并访问 XML 文件</h3>
+                <ol>
+                    <li>
+                        <p>首先需要找到 <strong>Apache</strong> 服务的根目录</p>
+                        <p>通过 cat 命令查看 <code>/etc/apache2/thhpd.conf</code>配置文件，可以发现配置文件通过 <strong>DocumentRoot</strong> 将根目录指定为<code>/Library/WebServer/Documents</code>，</p>
+                        <pre><code class="conf">DocumentRoot "/Library/WebServer/Documents"
+&lt;Directory "/Library/WebServer/Documents"&gt;
+    ... ...
+&lt;/Directory&gt;
+</code></pre>
+                    </li>
+                    <li>
+                        <p>在 <code>/Library/WebServer/Documents</code>目录下新建 XML 文件</p>
+                        <p>首先来到 <code>/Library/WebServer/Documents</code>目录，可以发现该目录下有一个<code>index.html.en</code>的文件，这就是我们刚才所看到的 <strong>"It works!"</strong> 的页面文件。然后通过以下命令新建并编辑 <strong>XML</strong> 文件（自行了解 <strong>vim</strong> 相关操作），文件名自己定：</p>
+                        <pre><code class="shell">sudo vim get_data.xml
+</code></pre>
+                    </li>
+                    <li>
+                        <p>文件创建成功后，通过浏览器进行访问（建议使用 <strong>Chrome</strong> 浏览器）</p>
+                        <p>在浏览器输入 <code>127.0.0.1/get_data.xml</code>，如果看到以下页面，说明访问成功</p>
+                    </li>
+                </ol>
+                <h3 id="title4">3. 小结</h3>
+                <p>通过上面一顿操作，我们就可以访问服务器上的 <strong>XML</strong> 文件了，然后即可通过编写安卓程序获取 <strong>XML</strong> 文件并进行解析，<strong>JSON</strong> 文件也是同理。</p>
+            </div>
+            <!--标签-->
+            <div class="ui right aligned basic segment m-padded-lr-responsive">
+                <div class="ui teal basic label">环境配置</div>
+            </div>
+            <!--赞赏-->
+            <div class="ui center aligned basic segment">
+                <button id="payButton" class="ui orange basic button circular">赞赏</button>
+            </div>
+            <div class="payQR ui flowing popup transition hidden">
+                <div class="ui orange basic label">
+                    <div class="ui images" style="font-size: inherit !important;">
+                        <div class="image">
+                            <img src="../static/images/wechat.jpg" alt="" class="ui rounded image" style="width: 120px">
+                            <div>支付宝</div>
+                        </div>
+                        <div class="image">
+                            <img src="../static/images/wechat.jpg" alt="" class="ui rounded image" style="width: 120px">
+                            <div>微信</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--博客信息-->
+        <div class="ui attached positive message">
+            <div class="ui grid">
+                <div class="eleven wide column">
+                    <ul class="middle aligned list">
+                        <li>作者：HYN</li>
+                        <li>发表时间：2020-1-27</li>
+                        <li>版权声明：本作品系 原创 ， 采用《署名-非商业性使用-禁止演绎 4.0 国际》许可协议</li>
+                        <li>公众号转载：请在文末添加作者公众号二维码</li>
+                    </ul>
+                </div>
+                <div class="five wide column">
+                    <img th:src="@{/images/wechat.jpg}" alt="" class="ui right floated rounded bordered image" style="width: 110px">
+                </div>
+            </div>
+        </div>
+        <!--留言区域-->
+        <div id="comment-container" class="ui bottom attached segment">
+            <div class="ui teal segment">
+                <div class="ui comments">
+                    <h3 class="ui dividing header">评论</h3>
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="https://i.picsum.photos/id/1003/100/100.jpg" alt="">
+                        </a>
+                        <div class="content">
+                            <a class="author">Matt</a>
+                            <div class="metadata">
+                                <span class="date">Today at 5:42PM</span>
+                            </div>
+                            <div class="text">
+                                How artistic!
+                            </div>
+                            <div class="actions">
+                                <a class="reply">回复</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="https://i.picsum.photos/id/1003/100/100.jpg" alt="">
+                        </a>
+                        <div class="content">
+                            <a class="author">Elliot Fu</a>
+                            <div class="metadata">
+                                <span class="date">Yesterday at 12:30AM</span>
+                            </div>
+                            <div class="text">
+                                <p>This has been very useful for my research. Thanks as well!</p>
+                            </div>
+                            <div class="actions">
+                                <a class="reply">回复</a>
+                            </div>
+                        </div>
+                        <div class="comments">
+                            <div class="comment">
+                                <a class="avatar">
+                                    <img src="https://i.picsum.photos/id/1003/100/100.jpg" alt="">
+                                </a>
+                                <div class="content">
+                                    <a class="author">Jenny Hess</a>
+                                    <div class="metadata">
+                                        <span class="date">Just now</span>
+                                    </div>
+                                    <div class="text">
+                                        Elliot you are always so right :)
+                                    </div>
+                                    <div class="actions">
+                                        <a class="reply">回复</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment">
+                        <a class="avatar">
+                            <img src="https://i.picsum.photos/id/1003/100/100.jpg" alt="">
+                        </a>
+                        <div class="content">
+                            <a class="author">Joe Henderson</a>
+                            <div class="metadata">
+                                <span class="date">5 days ago</span>
+                            </div>
+                            <div class="text">
+                                Dude, this is awesome. Thanks so much
+                            </div>
+                            <div class="actions">
+                                <a class="reply">回复</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="ui reply form">
+                <div class="field">
+                    <textarea name="commit_content" placeholder="友善的评论是交流的起点..."></textarea>
+                </div>
+                <div class="fields">
+                    <div class="field m-margin-bottom-small m-mobile-wide">
+                        <div class="ui left icon input">
+                            <i class="user icon"></i>
+                            <input type="text" name="nickname" placeholder="姓名">
+                        </div>
+                    </div>
+                    <div class="field m-margin-bottom-small m-mobile-wide">
+                        <div class="ui left icon input">
+                            <i class="mail icon"></i>
+                            <input type="text" name="email" placeholder="邮箱">
+                        </div>
+                    </div>
+                    <div class="field m-margin-bottom-small m-mobile-wide">
+                        <button class="ui teal button m-mobile-wide"><i class="edit icon"></i>发布评论</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部浮动按钮-->
+<div id="toolbar" class="m-fixed m-right-bottom m-padded" style="display: none !important;">
+    <div class="ui vertical icon buttons">
+        <button type="button" class="toc-button ui teal button">目录</button>
+        <a href="#comment-container" class="ui teal button">留言</a>
+        <button class="wechat ui icon button"><i class="weixin icon"></i></button>
+        <div id="toTop-button" class="ui icon button"><i class="chevron up icon"></i></div>
+    </div>
+</div>
+<!--目录-->
+<div class="toc-container ui flowing popup transition hidden" style="width: 250px !important;">
+     <ul class="js-toc"></ul>
+</div>
+
+<!--生成文章二维码，初始隐藏-->
+<div id="qrcode" class="wechat-qr ui flowing popup transition hidden" style="width: 130px !important;">
+<!--    <img src="./static/images/wechat.jpg" alt="" class="ui rounded image" style="width: 120px !important;">-->
+</div>
+
+<!--底部footer-->
+<footer th:replace="_fragment :: footer">
+
+</footer>
+
+<!--使用 thymeleaf 引入 js 依赖，这样注释之后在thymeleaf中仍然是有效的-->
+
+<!--/*/<th:block th:replace="_fragment :: script">/*/-->
+
+<!--/*/</th:block>/*/-->
+
+<script>
+    $('.menu.toggle').click(function () {
+        $('.m-item').toggleClass('m-mobile-hide');
+    });
+
+    $('#payButton').popup({
+        popup : $('.popup.payQR'),
+        on : 'click',
+        position : 'bottom center'
+    });
+
+    //tocbot初始化
+    tocbot.init({
+        // Where to render the table of contents.
+        tocSelector: '.js-toc',
+        // Where to grab the headings to build the table of contents.
+        contentSelector: '.js-toc-content',
+        // Which headings to grab inside of the contentSelector element.
+        headingSelector: 'h1, h2, h3',
+        // For headings inside relative or absolute positioned containers within content.
+        hasInnerContainers: true,
+    });
+    $('.toc-button').popup({
+        popup : $('.toc-container'),
+        on : 'click',
+        position : 'left center'
+    });
+
+    // 弹出文章二维码
+    $('.wechat').popup({
+        popup : $('.wechat-qr'),
+        // 默认 hover
+        on : 'click',
+        position : 'left center'
+    });
+
+    var qrcode = new QRCode("qrcode", {
+        // 当前页面的URL，会被转化为二维码
+        text: window.location.href,
+        width: 110,
+        height: 110,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
+
+    $('#toTop-button').click(function () {
+        $(window).scrollTo(0, 500);
+    });
+
+    // 控制浮动按钮显示和隐藏
+    var waypoint = new Waypoint({
+        element: document.getElementById('waypoints'),
+        handler: function(direction) {
+            if (direction === 'down') {
+                $('#toolbar').show(500)
+            } else {
+                $('#toolbar').hide(500)
+            }
+            console.log('Scrolled to waypoint!' + direction)
+        }
+    })
+</script>
+</body>
+</html>

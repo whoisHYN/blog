@@ -1,0 +1,5 @@
+2020-02-05 11:32:20.989  INFO 56196 --- [restartedMain] com.hyn.BlogApplication                  : Starting BlogApplication on hyn with PID 56196 (/Users/huangyaning/IdeaProjects/blog/target/classes started by huangyaning in /Users/huangyaning/IdeaProjects/blog)
+2020-02-05 11:32:20.991  INFO 56196 --- [restartedMain] com.hyn.BlogApplication                  : The following profiles are active: pro
+2020-02-05 11:32:22.590  WARN 56196 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2020-02-05 11:32:22.765  WARN 56196 --- [restartedMain] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates or check your Thymeleaf configuration)
+2020-02-05 11:32:22.933  INFO 56196 --- [restartedMain] com.hyn.BlogApplication                  : Started BlogApplication in 2.26 seconds (JVM running for 2.721)
