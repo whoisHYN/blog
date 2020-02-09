@@ -1,20 +1,19 @@
 package com.hyn.dao;
 
-import com.hyn.entity.Type;
+import com.hyn.entity.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
  * @Author: HYN
  * @Description:
- * @Date: 2020/2/8 1:06 下午
+ * @Date: 2020/2/9 6:03 下午
  * @Modified By:
  */
-public interface TypeRepository extends JpaRepository<Type, Long> {
-
+public interface TagRepository extends JpaRepository<Tag, Long> {
     /**
-     * 根据名称查询Type
+     * 根据name查询Tag
      * @param name
      * @return
      */
-    Type getTypeByName(String name);
+    Tag getByName(String name);
 }

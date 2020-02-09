@@ -1,6 +1,7 @@
 package com.hyn.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,8 +18,10 @@ public class Tag {
     @Id
     @GeneratedValue
     private Long id;
+    @NotBlank(message = "类型名称不能为空！")
     private String name;
 
+    /**一篇文章可以对应多个标签，一个标签也可以对应多篇文章*/
     @ManyToMany(mappedBy = "tags")
     private List<Blog> blogs = new ArrayList<>();
 

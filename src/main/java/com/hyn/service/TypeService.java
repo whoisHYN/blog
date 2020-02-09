@@ -42,6 +42,13 @@ public interface TypeService {
     Type updateType(Long id, Type type);
 
     /**
+     * 通过名称查询Type
+     * @param name
+     * @return
+     */
+    Type getTypeByName(String name);
+
+    /**
      * 删除Type
      * @param id
      */
