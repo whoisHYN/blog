@@ -1,6 +1,8 @@
 package com.hyn.entity;
 
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class Type {
     @Id
     @GeneratedValue
     private Long id;
+    @NotBlank(message = "类型名称不能为空！")
     private String name;
 
     /**一个分类对应多篇博客*/

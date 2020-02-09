@@ -2,7 +2,9 @@ package com.hyn.service;
 
 import com.hyn.dao.UserRepository;
 import com.hyn.entity.User;
+import com.hyn.util.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @Author: HYN
@@ -10,13 +12,18 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @Date: 2020/2/7 1:47 下午
  * @Modified By:
  */
+@Service
 public class UserServiceImpl implements UserService {
 
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public User checkUser(String username, String password) {
-        return userRepository.findByUsernameAndPassword(username, password);
+        return userRepository.findByUsernameAndPassword(username, MD5Utils.digest(password));
     }
 }

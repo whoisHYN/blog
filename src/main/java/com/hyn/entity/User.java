@@ -19,6 +19,7 @@ public class User {
     @GeneratedValue
     private Long id;
     private String nickname;
+    private String username;
     private String password;
     private String email;
     private Integer type;
@@ -48,6 +49,14 @@ public class User {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public Integer getType() {
