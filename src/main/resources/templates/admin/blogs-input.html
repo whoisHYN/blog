@@ -195,9 +195,14 @@
         <p class="m-opacity-tiny m-text-spaced m-text-thin">Copyright © 2020 HYN Designed by huangyaning</p>
     </div>
 </footer>
+
+<!--使用 thymeleaf 引入 js 依赖，这样注释之后在thymeleaf中仍然是有效的-->
+
+<!--/*/<th:block th:replace="admin/_fragment :: script">/*/-->
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-<script src="../../static/lib/editormd/editormd.min.js"></script>
+<!--/*/</th:block>/*/-->
+
 <script>
     $('.menu.toggle').click(function () {
         $('.m-item').toggleClass('m-mobile-hide');
