@@ -2,6 +2,7 @@ package com.hyn.entity;
 
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,10 +22,16 @@ public class Blog {
     private Long id;
 
     /**博客标题*/
+    @NotBlank(message = "标题不能为空")
     private String title;
-    /**博客内容*/
+
+    /**博客内容,长文本类型*/
+    @Basic(fetch = FetchType.LAZY)
+    @Lob
+    @NotBlank(message = "内容不能为空")
     private String content;
     /**头图*/
+    @NotBlank(message = "头图不能为空")
     private String firstPic;
     /**标签*/
     private String flag;
@@ -61,6 +68,9 @@ public class Blog {
 
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments = new ArrayList<>();
+
+    @Transient
+    private String tagIds;
 
     public Blog() {
     }
@@ -199,6 +209,14 @@ public class Blog {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public String getTagIds() {
+        return tagIds;
+    }
+
+    public void setTagIds(String tagIds) {
+        this.tagIds = tagIds;
     }
 
     @Override

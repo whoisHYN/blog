@@ -4,6 +4,8 @@ import com.hyn.entity.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * @Author: HYN
  * @Description:
@@ -33,6 +35,18 @@ public interface TagService {
      */
     Page<Tag> listTag(Pageable pageable);
 
+    /**
+     * 查询所有Tag
+     * @return
+     */
+    List<Tag> listTag();
+
+    /**
+     * 根据前端传过来的ID查询
+     * @param ids
+     * @return
+     */
+    List<Tag> listTag(String ids);
     /**
      * 更新Tag
      * @param id
