@@ -3,6 +3,7 @@ package com.hyn.service;
 import com.hyn.dao.BlogRepository;
 import com.hyn.entity.Blog;
 import com.hyn.exception.NotFindException;
+import com.hyn.util.MarkDownUtils;
 import com.hyn.util.MyBeanUtils;
 import com.hyn.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
@@ -58,6 +59,19 @@ public class BlogServiceImpl implements BlogService {
         return blogRepository.getOne(id);
     }
 
+    @Override
+    public Blog getAndConvert(Long id) {
+        Blog blog = blogRepository.getOne(id);
+        if (blog == null) {
+            throw new NotFindException("该博客不存在！");
+        }
+        Blog b = new Blog();
+        BeanUtils.copyProperties(blog, b);
+        String content = blog.getContent();
+        blog.setContent(MarkDownUtils.markdownToHtmlExtensions(content));
+        return blog;
+    }
+
     /**
      * 拼接查询语句
      * @param pageable
@@ -86,6 +100,11 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Page<Blog> listBlog(Pageable pageable) {
         return blogRepository.findAll(pageable);
+    }
+
+    @Override
+    public Page<Blog> listBlog(String query, Pageable pageable) {
+        return blogRepository.findByQuery(query, pageable);
     }
 
     @Override

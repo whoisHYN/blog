@@ -60,7 +60,7 @@
                     <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
                         <div class="ui middle aligned stackable mobile reversed grid">
                             <div class="eleven wide column">
-                                <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" class="m-black" th:text="${blog.title}">HTTPS 详解一：附带最精美详尽的 HTTPS 原理图</a></h3>
+                                <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" class="m-black" th:text="${blog.title}" target="_blank">HTTPS 详解一：附带最精美详尽的 HTTPS 原理图</a></h3>
                                 <p class="m-text" th:text="|${blog.description}......|">前言 作为一个有追求的程序员，了解行业发展趋势和扩充自己的计算机知识储备都是很有必要的，特别是一些计算机基础方面的内容，就比如本篇文章要讲的计算...</p>
                                 <div class="ui stackable grid">
                                     <div class="eleven wide column">

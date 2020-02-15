@@ -30,6 +30,13 @@ public interface BlogService {
     Blog getBlog(Long id);
 
     /**
+     * 查询博客并将内容从markdown格式转化为HTML格式
+     * @param id
+     * @return
+     */
+    Blog getAndConvert(Long id);
+
+    /**
      * 按条件分页查Blog
      * @param pageable
      * @param blogQuery
@@ -43,6 +50,14 @@ public interface BlogService {
      * @return
      */
     Page<Blog> listBlog(Pageable pageable);
+
+    /**
+     * 根据查询条件分页查询
+     * @param query
+     * @param pageable
+     * @return
+     */
+    Page<Blog> listBlog(String query, Pageable pageable);
 
     /**
      * 推荐的博客

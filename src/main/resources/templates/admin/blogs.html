@@ -107,7 +107,7 @@
                     <td th:text="${blog.type.name}">Java虚拟机</td>
                     <td th:text="${blog.recommend} ? '是' : '否'">是</td>
                     <td th:text="${blog.published} ? '发布' : '草稿'">草稿</td>
-                    <td th:text="${blog.updateTime}">2020-1-28 20:09</td>
+                    <td th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm')}">2020-1-28 20:09</td>
                     <td>
                         <a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui teal mini basic button">编辑</a>
                         <a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui red mini basic button">删除</a>
@@ -118,7 +118,7 @@
                 <tr>
                     <th colspan="7">
                         <div class="ui pagination mini menu" th:if="${page.totalPages}>1">
-                            <a onclick="page(this)" th:attr="data-page=${page.number}+1" class="item" th:unless="${page.first}">上一页</a>
+                            <a onclick="page(this)" th:attr="data-page=${page.number}-1" class="item" th:unless="${page.first}">上一页</a>
                             <a onclick="page(this)" th:attr="data-page=${page.number}+1" class="item" th:unless="${page.last}">下一页</a>
                         </div>
                         <a href="#" th:href="@{/admin/blogs/input}" class="ui mini right floated teal basic button">新增</a>
