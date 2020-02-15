@@ -1,7 +1,11 @@
 package com.hyn.dao;
 
 import com.hyn.entity.Type;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /**
  * @Author: HYN
@@ -17,4 +21,12 @@ public interface TypeRepository extends JpaRepository<Type, Long> {
      * @return
      */
     Type getTypeByName(String name);
+
+    /**
+     * 根据对应的博客数量查出前几个
+     * @param pageable
+     * @return
+     */
+    @Query("select t from Type t")
+    List<Type> findTop(Pageable pageable);
 }

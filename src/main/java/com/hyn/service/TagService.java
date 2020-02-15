@@ -42,6 +42,13 @@ public interface TagService {
     List<Tag> listTag();
 
     /**
+     * 查出博客数量最多的前面几个
+     * @param size
+     * @return
+     */
+    List<Tag> listTagTop(Integer size);
+
+    /**
      * 根据前端传过来的ID查询
      * @param ids
      * @return

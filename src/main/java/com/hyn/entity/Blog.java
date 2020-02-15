@@ -33,7 +33,7 @@ public class Blog {
     /**头图*/
     @NotBlank(message = "头图不能为空")
     private String firstPic;
-    /**标签*/
+    /**原创/翻译/转载*/
     private String flag;
     /**阅读数*/
     private Integer views;
@@ -53,6 +53,8 @@ public class Blog {
     /**修改日期*/
     @Temporal(TemporalType.TIMESTAMP)
     private Date updateTime;
+    /**博客描述*/
+    private String description;
 
     /**分类*/
     @ManyToOne
@@ -219,6 +221,39 @@ public class Blog {
         this.tagIds = tagIds;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * 由于数据库未存储tagIds变量，需要在这里为其赋值
+     */
+    public void init() {
+        this.tagIds = tagsToIds(this.getTags());
+    }
+
+    /**
+     * 利用tags获取tagIds，供前端使用
+     * @param tags
+     */
+    private String tagsToIds(List<Tag> tags) {
+        if (!tags.isEmpty()) {
+            StringBuilder sb = new StringBuilder();
+            for (Tag tag : tags) {
+                sb.append(tag.getId());
+                sb.append(",");
+
+            }
+            String str = sb.toString();
+            return str.substring(0, str.length() - 1);
+        }
+        return tagIds;
+    }
+
     @Override
     public String toString() {
         return "Blog{" +
@@ -235,6 +270,12 @@ public class Blog {
                 ", comment=" + comment +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", description='" + description + '\'' +
+                ", type=" + type +
+                ", tags=" + tags +
+                ", user=" + user +
+                ", comments=" + comments +
+                ", tagIds='" + tagIds + '\'' +
                 '}';
     }
 }

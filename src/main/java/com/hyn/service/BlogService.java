@@ -5,6 +5,8 @@ import com.hyn.vo.BlogQuery;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * @Author: HYN
  * @Description:
@@ -28,13 +30,26 @@ public interface BlogService {
     Blog getBlog(Long id);
 
     /**
-     * 分页查
+     * 按条件分页查Blog
      * @param pageable
      * @param blogQuery
      * @return
      */
     Page<Blog> listBlog(Pageable pageable, BlogQuery blogQuery);
 
+    /**
+     * 分页查所有Blog
+     * @param pageable
+     * @return
+     */
+    Page<Blog> listBlog(Pageable pageable);
+
+    /**
+     * 推荐的博客
+     * @param size
+     * @return
+     */
+    List<Blog> listRecommendBlogTop(Integer size);
     /**
      * 改
      * @param id

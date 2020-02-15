@@ -2,11 +2,41 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="_fragment :: header(~{::title})">
     <title>博客</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="../static/css/me.css" th:href="@{/css/me.css}">
+    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
+    <link rel="stylesheet" href="../static/css/animate.min.css" th:href="@{/css/animate.min.css}">
+    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
+    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.cs}">
 </head>
 <body>
 
 <!--导航-->
-<nav th:replace="_fragment :: menu(1)"></nav>
+<nav th:replace="_fragment :: menu(1)" class="ui inverted attached segment m-padded-tb-mini">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item">HYN的博客</h2>
+            <a href="#" class="active m-item item m-mobile-hide"><i class="small home icon"></i>首页</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="small idea icon"></i>分类</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="small tags icon"></i>标签</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="small clone icon"></i>归档</a>
+            <a href="#" class="m-item item m-mobile-hide"><i class="small info icon"></i>关于我</a>
+            <div class="m-item right item m-mobile-hide">
+                <div class="ui icon inverted transparent input">
+                    <input type="text" placeholder="Search...">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--菜单按钮,大屏时隐藏，手机端显示，toggle用于jQuery获取，menu可以让按钮样式正好合适,m-right-top定义按钮绝对位置，
+     m-mobile-show设置按钮小屏显示，大屏不显示-->
+    <a href="#" class="toggle menu ui black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
 
 <!--中间内容-->
 <div class="m-padded-tb-big m-container">
@@ -21,12 +51,45 @@
                             <h3 class="ui teal header">博客</h3>
                         </div>
                         <div class="right aligned column">
-                            共 <h3 class="ui orange header m-inline-block m-text-thin"> 14 </h3> 篇
+                            共 <h3 class="ui orange header m-inline-block m-text-thin" th:text="${page.totalElements}"> 14 </h3> 篇
                         </div>
                     </div>
                 </div>
                 <!--博客列表content-->
                 <div class="ui attached segment">
+                    <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
+                        <div class="ui middle aligned stackable mobile reversed grid">
+                            <div class="eleven wide column">
+                                <h3 class="ui header"><a href="#" th:href="@{/blog/{id}(id=${blog.id})}" class="m-black" th:text="${blog.title}">HTTPS 详解一：附带最精美详尽的 HTTPS 原理图</a></h3>
+                                <p class="m-text" th:text="|${blog.description}......|">前言 作为一个有追求的程序员，了解行业发展趋势和扩充自己的计算机知识储备都是很有必要的，特别是一些计算机基础方面的内容，就比如本篇文章要讲的计算...</p>
+                                <div class="ui stackable grid">
+                                    <div class="eleven wide column">
+                                        <div class="mini ui link list horizontal">
+                                            <div class="item">
+                                                <img th:src="@{${blog.user.avatar}}" src="https://i.picsum.photos/id/1003/100/100.jpg" class="ui avatar image" alt="">
+                                                <div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">HYN</a></div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2020-1-26</span>
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i><span th:text="${blog.views}">666</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned five wide column">
+                                        <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin" th:text="${blog.type.name}">HTTPS</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="five wide column">
+                                <a href="#" target="_blank" th:href="@{/blog/{id}(id=${blog.id})}">
+                                    <img src="https://i.picsum.photos/id/1003/800/450.jpg" th:src="@{${blog.firstPic}}" alt="" class="ui rounded image">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--/*-->
                     <div class="ui padded vertical segment m-padded-tb-large">
                         <div class="ui stackable mobile reversed grid">
                             <div class="eleven wide column">
@@ -219,48 +282,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="ui padded vertical segment m-padded-tb-large">
-                        <div class="ui stackable mobile reversed grid">
-                            <div class="eleven wide column">
-                                <h3 class="ui header">HTTPS 详解一：附带最精美详尽的 HTTPS 原理图</h3>
-                                <p class="m-text">前言 作为一个有追求的程序员，了解行业发展趋势和扩充自己的计算机知识储备都是很有必要的，特别是一些计算机基础方面的内容，就比如本篇文章要讲的计算...</p>
-                                <div class="ui stackable grid">
-                                    <div class="eleven wide column">
-                                        <div class="mini ui link list horizontal">
-                                            <div class="item">
-                                                <img src="https://i.picsum.photos/id/1003/100/100.jpg" class="ui avatar image" alt="">
-                                                <div class="content"><a href="#" class="header">HYN</a></div>
-                                            </div>
-                                            <div class="item">
-                                                <i class="calendar icon"></i> 2020-1-26
-                                            </div>
-                                            <div class="item">
-                                                <i class="eye icon"></i> 666
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="right aligned five wide column">
-                                        <a href="#" target="_blank" class="ui teal basic label m-padded-tiny m-text-thin">HTTPS</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="five wide column">
-                                <a href="#" target="_blank">
-                                    <img src="https://i.picsum.photos/id/1003/800/450.jpg" alt="" class="ui rounded image">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
+                    <!--*/-->
                 </div>
+
                 <!--footer 分页-->
-                <div class="ui bottom attached segment">
+                <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
                     <div class="ui middle aligned two column grid">
                         <div class="column">
-                            <a href="#" class="ui mini teal basic button">上一页</a>
+                            <a href="#" th:href="@{/(page=${page.number}-1)}" class="ui teal basic mini button" th:unless="${page.first}">上一页</a>
                         </div>
                         <div class="right aligned column">
-                            <a href="#" class="ui mini teal basic button">下一页</a>
+                            <a href="#" th:href="@{/(page=${page.number}+1)}" class="ui teal basic mini button" th:unless="${page.last}">上一页</a>
                         </div>
                     </div>
                 </div>
@@ -281,6 +313,11 @@
                     </div>
                     <div class="ui teal segment">
                         <div class="ui vertical fluid menu">
+                            <a href="#" class="item" th:each="type : ${types}">
+                                <span th:text="${type.name}">学习日志</span>
+                                <div class="ui teal basic left pointing label" th:text="${#arrays.length(type.blogs)}">66</div>
+                            </a>
+                            <!--/*-->
                             <a href="#" class="item">
                                 学习日志
                                 <div class="ui teal basic left pointing label">66</div>
@@ -297,10 +334,7 @@
                                 学习日志
                                 <div class="ui teal basic left pointing label">66</div>
                             </a>
-                            <a href="#" class="item">
-                                学习日志
-                                <div class="ui teal basic left pointing label">66</div>
-                            </a>
+                            <!--*/-->
                         </div>
                     </div>
                 </div>
@@ -317,9 +351,11 @@
                         </div>
                     </div>
                     <div class="ui teal segment">
-                        <a href="#" target="_blank" class="ui teal basic label left pointing m-margin-tb-tiny">
-                            JVM <div class="detail">23</div>
+                        <a href="#" target="_blank" class="ui teal basic label left pointing m-margin-tb-tiny" th:each="tag : ${tags}">
+                            <span th:text="${tag.name}">JVM</span>
+                            <div class="detail" th:text="${#arrays.length(tag.blogs)}">23</div>
                         </a>
+                        <!--/*-->
                         <a href="#" target="_blank" class="ui teal basic label left pointing m-margin-tb-tiny">
                             JVM <div class="detail">24</div>
                         </a>
@@ -335,6 +371,7 @@
                         <a href="#" target="_blank" class="ui teal basic label left pointing m-margin-tb-tiny">
                             JVM <div class="detail">23</div>
                         </a>
+                        <!--*/-->
                     </div>
                 </div>
                 <!--最新推荐-->
@@ -342,6 +379,12 @@
                     <div class="ui secondary segment">
                         <i class="bookmark icon"></i> 最新推荐
                     </div>
+                    <div class="ui segment" th:each="recommendBlog : ${recommendBlogs}">
+                        <a href="#" th:href="@{/blog/{id}(id=${recommendBlog.id})}" target="_blank" class="m-black m-text-thin">
+                            <span th:text="${recommendBlog.title}">面试题详解</span>
+                        </a>
+                    </div>
+                    <!--/*-->
                     <div class="ui segment">
                         <a href="#" target="_blank" class="m-black m-text-thin">面试题详解</a>
                     </div>
@@ -360,9 +403,7 @@
                     <div class="ui segment">
                         <a href="#" target="_blank" class="m-black m-text-thin">面试题详解</a>
                     </div>
-                    <div class="ui segment">
-                        <a href="#" target="_blank" class="m-black m-text-thin">面试题详解</a>
-                    </div>
+                    <!--*/-->
                 </div>
                 <!--二维码-->
                 <h4 class="ui horizontal divider header m-margin-top-large">扫码关注我</h4>
@@ -375,7 +416,40 @@
 </div>
 
 <!--底部footer-->
-<footer th:replace="_fragment :: footer"></footer>
+<footer th:replace="_fragment :: footer" class="ui inverted segment vertical m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="four wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../static/images/wechat.jpg" th:src="@{/images/wechat.jpg}" class="ui rounded image" alt="我的微信 " style="width: 110px">
+                    </div>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header m-text-spaced m-text-thin">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">用户故事 (User Story)</a>
+                    <a href="#" class="item">Java虚拟机系列</a>
+                    <a href="#" class="item">HTTPS详解</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header m-text-spaced m-text-thin">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item">Email:2810854200@qq.com</a>
+                    <a href="#" class="item">QQ:2810854200</a>
+                </div>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header m-text-spaced m-text-thin">Blog</h4>
+                <p class="m-opacity-mini m-text-spaced m-text-thin">欢迎各位来参观我的个人博客，在这里我会第一时间分享我的成长过程和学习心得，欢迎关注</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-opacity-tiny m-text-spaced m-text-thin">Copyright © 2020 HYN Designed by huangyaning</p>
+    </div>
+</footer>
 
 <!--使用 thymeleaf 引入 js 依赖，这样注释之后在thymeleaf中仍然是有效的-->
 

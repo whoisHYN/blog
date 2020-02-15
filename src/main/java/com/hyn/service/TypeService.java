@@ -42,6 +42,13 @@ public interface TypeService {
     List<Type> listType();
 
     /**
+     * 首页需要展示的分类数量
+     * @param number
+     * @return
+     */
+    List<Type> listTypeTop(Integer number);
+
+    /**
      * 更新Type
      * @param id
      * @param type

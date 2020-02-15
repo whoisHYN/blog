@@ -1,7 +1,11 @@
 package com.hyn.dao;
 
 import com.hyn.entity.Tag;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /**
  * @Author: HYN
@@ -16,4 +20,12 @@ public interface TagRepository extends JpaRepository<Tag, Long> {
      * @return
      */
     Tag getByName(String name);
+
+    /**
+     * 根据对应博客数量查出前面几个
+     * @param pageable
+     * @return
+     */
+    @Query("select t from Tag t")
+    List<Tag> findTop(Pageable pageable);
 }

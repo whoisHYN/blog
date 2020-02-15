@@ -3,11 +3,14 @@ package com.hyn.service;
 import com.hyn.dao.BlogRepository;
 import com.hyn.entity.Blog;
 import com.hyn.exception.NotFindException;
+import com.hyn.util.MyBeanUtils;
 import com.hyn.vo.BlogQuery;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -39,9 +42,13 @@ public class BlogServiceImpl implements BlogService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Blog saveBlog(Blog blog) {
-        blog.setCreateTime(new Date());
-        blog.setUpdateTime(new Date());
-        blog.setViews(0);
+        if (blog.getId() == null) {
+            blog.setCreateTime(new Date());
+            blog.setUpdateTime(new Date());
+            blog.setViews(0);
+        } else {
+            blog.setUpdateTime(new Date());
+        }
         return blogRepository.save(blog);
     }
 
@@ -76,6 +83,18 @@ public class BlogServiceImpl implements BlogService {
         }, pageable);
     }
 
+    @Override
+    public Page<Blog> listBlog(Pageable pageable) {
+        return blogRepository.findAll(pageable);
+    }
+
+    @Override
+    public List<Blog> listRecommendBlogTop(Integer size) {
+        Sort sort = Sort.by(Sort.Direction.DESC, "updateTime");
+        Pageable pageable = PageRequest.of(0, size, sort);
+        return blogRepository.findTop(pageable);
+    }
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public Blog updateBlog(Long id, Blog blog) {
@@ -83,7 +102,9 @@ public class BlogServiceImpl implements BlogService {
         if (blog1 == null) {
             throw new NotFindException("该博客不存在");
         }
-        BeanUtils.copyProperties(blog, blog1);
+        // 确保编辑后的blog的空属性不会拷贝到原对象
+        BeanUtils.copyProperties(blog, blog1, MyBeanUtils.getNullPropertyNames(blog));
+        blog1.setUpdateTime(new Date());
         return blogRepository.save(blog1);
     }
 
