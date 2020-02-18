@@ -6,7 +6,6 @@ import java.security.NoSuchAlgorithmException;
 /**
  * @Author: HYN
  * @Description:  对前端传来的数据进行MD5后再存放在服务器数据库
- * @Date: 2020/2/8 10:04 上午
  * @Modified By:
  */
 public class MD5Utils {

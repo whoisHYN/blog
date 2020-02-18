@@ -5,7 +5,6 @@ import com.hyn.entity.User;
 /**
  * @Author: HYN
  * @Description:
- * @Date: 2020/2/7 1:46 下午
  * @Modified By:
  */
 public interface UserService {

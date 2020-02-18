@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * @Author: HYN
  * @Description:
- * @Date: 2020/2/8 11:37 上午
  * @Modified By:
  */
 public class LoginInterceptor extends HandlerInterceptorAdapter {

@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * @Author: HYN
  * @Description:
- * @Date: 2020/2/13 4:14 下午
  * @Modified By:
  */
 public class MyBeanUtils {

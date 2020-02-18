@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * @Author: HYN
  * @Description:
- * @Date: 2020/2/10 12:54 下午
  * @Modified By:
  */
 public interface BlogRepository extends JpaRepository<Blog, Long>, JpaSpecificationExecutor<Blog> {

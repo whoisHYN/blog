@@ -7,7 +7,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 /**
  * @Author: HYN
  * @Description:
- * @Date: 2020/2/8 11:40 上午
  * @Modified By:
  */
 @Configuration

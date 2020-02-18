@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * @Author: HYN
  * @Description: 全局异常处理
- * @Date: 2020/2/5 11:45 上午
  * @Modified By:
  */
 @ControllerAdvice
