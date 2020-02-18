@@ -1,6 +1,7 @@
 #### 1. 项目结构
 本项目是基于 Spring Boot 的博客系统，参考主流博客网站实现了博客管理、发布、前端展示等功能模块，整体风格简约美观。
 项目整体结构如下:
+
 ![项目结构](https://img-blog.csdnimg.cn/20200215210401850.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzIwNzA1Ng==,size_16,color_FFFFFF,t_70)
 > 项目结构
 
