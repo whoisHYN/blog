@@ -8,6 +8,7 @@
 后端包含管理员登录、博客管理、分类管理和标签管理四大模块。前端基于 Semantic UI 完成了首页、分类、标签和归档等展示和管理页面的构建。
 #### 2. 技术栈与开发环境
 * 后端：Spring Boot + MyBatis + Thymeleaf 模板
+  注意：初始版本用的 Spring Data JPA，后面用了Mybatis。未来得及更新
 * 数据库：MySQL
 * 缓存：Redis
 * 前端：Semantic UI
